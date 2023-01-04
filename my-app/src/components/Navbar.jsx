@@ -1,62 +1,25 @@
-import { useState } from "react"; 
+import NavbarDropdown from "./Navbar/NavbarDropdown";
+import NavbarMenu from "./Navbar/NavbarMenu";
+import NavbarWrapper from "./Navbar/NavbarWrapper";
 export default function Navbar(){
-
-    const [showDropdown, setShowDropdown] = useState(false);
+    const menuItems = [
+        {label: 'Home', link: "#"},
+        {label: 'Articles', link: "#"},
+        {label: 'Feedback', link: "#"},
+        {label: 'Files', link: "#"},
+    ]
+    const dropdownItems = [
+        {label: 'Home', link: "#"},
+        {label: 'Inbox', link: "#"},
+        {label: 'Settings', link: "#"},
+        {label: '---', link: "#"},
+        {label: 'Sign out', link: "#"}
+    ]
+    return(<>
+    <NavbarWrapper>
+        <NavbarMenu title="Admin" items={menuItems} />
+        <NavbarDropdown items = {dropdownItems} img='https://avatars.githubusercontent.com/u/81268891?s=200&v=4' />
+    </NavbarWrapper>
     
-    const toggleDropdown = () =>{
-        setShowDropdown(!showDropdown)
-    };
-    return(<><nav className="navbar navbar-expand-lg bg-secondary">
-  <div className="container-fluid">
-    <button className="navbar-toggler" type="button" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a className="navbar-brand" href="#">Admin</a>
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Нүүр</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#"> </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link disabled">Мэдээ</a>
-        </li>
-      </ul>
-    </div>
-    <div>
-            <div className="dropdown text-end">
-              <a onClick={toggleDropdown} href="#" className="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />
-              </a>
-              <ul className={`dropdown-menu text-small end-0 ${showDropdown && 'show'}`}>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    New project...
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Sign out
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-  </div>
-</nav></>)
+</>)
 }
