@@ -122,17 +122,17 @@ export default function State() {
     setTodos(todos.filter((k, i) => i !== index));
   };
 
-  const EditTodo = (index) => {
-    const newList = todos.map((todo, i) => {
-      if (i === index) {
-        const newTodo = { ...todo };
-        newTodo.editing = !newTodo.editing;
-        return newTodo;
-      }
-      return todo;
-    });
-    setTodos(newList);
-  };
+  // const EditTodo = (index) => {
+  //   const newList = todos.map((todo, i) => {
+  //     if (i === index) {
+  //       const newTodo = { ...todo };
+  //       newTodo.editing = !newTodo.editing;
+  //       return newTodo;
+  //     }
+  //     return todo;
+  //   });
+  //   setTodos(newList);
+  // };
 
   const handleCheck = (index) => {
     const newList = todos.map((todo, i) => {
@@ -148,9 +148,9 @@ export default function State() {
   const handleEdit = (e, id) => {
     // console.log("ajiljinaa", id);
     console.log(e.detail);
-    if (e.detail == 2) {
+    if (e.detail === 2) {
       const newList = todos.map((todo, index) => {
-        if (index == id) {
+        if (index === id) {
           const newTodo = { ...todo };
           newTodo.editing = !newTodo.editing;
           return newTodo;
@@ -166,7 +166,7 @@ export default function State() {
 
     if (e.key === "Enter") {
       const newList = todos.map((todo, index) => {
-        if (index == id) {
+        if (index === id) {
           const newTodo = { ...todo };
           newTodo.editing = !newTodo.editing;
           newTodo.value = e.target.value;

@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import State from './State';
+import SecretJutsu from './Demo-react-jutsu';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <State />
+    {/* <State /> */}
     {/* <App/> */}
+    <SecretJutsu/>
   </React.StrictMode>
 );
 
