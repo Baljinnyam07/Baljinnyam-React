@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import State from './State';
-import SecretJutsu from './Demo-react-jutsu';
+import SecretJutsu from './SecretJutsu';
+import Snake from './snake';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    
     {/* <State /> */}
     {/* <App/> */}
-    <SecretJutsu/>
+    <Snake/>
   </React.StrictMode>
 );
 
