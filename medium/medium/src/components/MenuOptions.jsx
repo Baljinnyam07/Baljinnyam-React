@@ -1,3 +1,4 @@
+import React from "react";
 export default function MenuOptions() {
   const menu = [
     "Resolutuibs",
@@ -9,9 +10,9 @@ export default function MenuOptions() {
 
   return (
     <>
-      <div className="d-flex">
+      <div className="d-flex borderdiv">
         {menu.map((menus) => (
-          <div id="menuOptions" className="p-1 fs-6 bg-secondary rounded-4">
+          <div className="border">
             {menus}
           </div>
         ))}

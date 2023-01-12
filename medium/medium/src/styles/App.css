@@ -104,6 +104,24 @@ body {
   font-size: 14px;
 }
 
-#menuOptions {
-  font-size: 5px;
+.menunews{
+  background-color: #F5F2F6;
+}
+
+.border{
+  height: 36px;
+  font-size: 13px;
+  padding: 8px 19.7812px 8px 16px;
+  background: #EBE9EC;
+  border-radius: 100px;
+  align-items: center;
+  justify-content: center;
+}
+.borderdiv{
+  padding: 8px 80.4219px 0px 0px;
+  gap: 8px;
+}
+
+.maindiv{
+  border-right: 1px solid #EBE9EC;
 }

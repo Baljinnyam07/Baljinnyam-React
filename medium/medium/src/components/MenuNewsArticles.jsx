@@ -1,3 +1,8 @@
+import React from "react";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+
 export default function MenuNewsArticles() {
   const News = [
     {
@@ -5,7 +10,7 @@ export default function MenuNewsArticles() {
       date: "Dec 24, 2022",
       title: "2022: The year that changed the way we work",
       article: "articles",
-      image: "https://placeimg.com/100/100/people?t=1673509945561",
+      image: <img src="../images/Newsimage/image1.png" alt="" />,
       menu: "Productivity",
       readTime: "8 min read",
     },
@@ -14,7 +19,7 @@ export default function MenuNewsArticles() {
       date: "Dec 24, 2022",
       title: "2022: The year that changed the way we work",
       article: "articles",
-      image: "https://placeimg.com/100/100/people?t=1673509945561",
+      image: <img src="../images/Newsimage/image2.png" alt="" />,
       menu: "Productivity",
       readTime: "8 min read",
     },
@@ -23,7 +28,7 @@ export default function MenuNewsArticles() {
       date: "Dec 24, 2022",
       title: "2022: The year that changed the way we work",
       article: "articles",
-      image: "https://placeimg.com/100/100/people?t=1673509945561",
+      image: <img src="../images/Newsimage/image3.png" alt="" />,
       menu: "Productivity",
       readTime: "8 min read",
     },
@@ -32,7 +37,7 @@ export default function MenuNewsArticles() {
       date: "Dec 24, 2022",
       title: "2022: The year that changed the way we work",
       article: "articles",
-      image: "https://placeimg.com/100/100/people?t=1673509945561",
+      image: <img src="../images/Newsimage/image4.png" alt="" />,
       menu: "Productivity",
       readTime: "8 min read",
     },
@@ -41,7 +46,7 @@ export default function MenuNewsArticles() {
       date: "Dec 24, 2022",
       title: "2022: The year that changed the way we work",
       article: "articles",
-      image: "https://placeimg.com/100/100/people?t=1673509945561",
+      image: <img src="../images/Newsimage/image5.png" alt="" />,
       menu: "Productivity",
       readTime: "8 min read",
     },
@@ -49,17 +54,39 @@ export default function MenuNewsArticles() {
 
   return (
     <div>
+      
       {News.map((user) => (
-        <div>
-          {user.date}
-          {user.from}
-          {user.title}
-          {user.article}
-          {user.image}
-          {user.menu}
-          {user.readTime}
-        </div>
-      ))}
+          <div className="p-4 menunews">
+            {user.date}
+            <Row >
+            <Col>
+                <div>
+                  </div>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      {user.from}
+                      {user.title}
+                      <div>
+                        {user.article}
+                      </div>
+                      <div>
+                        <div className="border">
+                          {user.menu}
+                        </div>
+                      {user.readTime}
+                      </div>
+                    </div>
+                  </div>
+            </Col>
+            <Col>
+                <div>
+                  {user.image}
+                </div>
+            </Col>
+            <hr />
+          </Row>
+          </div>
+        ))}
     </div>
   );
 }
