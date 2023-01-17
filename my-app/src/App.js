@@ -1,25 +1,23 @@
 import './styles/bootstrap.css'
-// import './styles/style.css'
 import Navbar from './components/Navbar';
-import Heading from './components/Heading';
-import HeadingTable from './components/HeadingTable';
 import Select from 'react-select';
 import DynamicModal from './components/utils/DynamicModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PostCreate from './components/Blogs/PostCreate';
-import SecretJutsu from './SecretJutsu';
-import Button from 'react-bootstrap/esm/Button';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Articles from './pages/Articles';
 import Signin from './pages/Signin';
 import SignInError from './pages/SigninError';
 import Signup from './pages/Signup';
+import SigninSuccess from './pages/SigninSuccess';
+import SignOut from './pages/SignOut';
 
 
 
 function App() {
-  const [signedIn, setSignedIn] = useState(false);
+  const [me, setMe] = useState(undefined)
+  const [show, setShow] = useState(false);
   const [menuShow, setMenuShow] = useState(false);
   
   const options = [
@@ -27,16 +25,24 @@ function App() {
   { value: 'strawberry', label: 'Strawberry' },
   { value: 'vanilla', label: 'Vanilla' },
 ];
-  const [show, setShow] = useState(false);
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
 
-  if(!signedIn){
+  useEffect(()=>{
+    const myData = localStorage.getItem('me');
+    if(myData !== "undefined"){
+      setMe(JSON.parse(myData));
+    }
+  }, []);
+  const navigate = useNavigate()
+ 
+  if(!me){
     return (
       <>
         <Routes>
         <Route path="/signin" element={<Signin/>} />
+        <Route path="/signin/success" element={<SigninSuccess setMe={setMe}/>} />
         <Route path="/signup" element={<Signup/>}/>
         <Route path="*" element={<SignInError/>}/>
       </Routes>
@@ -54,6 +60,7 @@ function App() {
         <div className="off-menu-sibling">
           <Routes>
             <Route path='/' element={<Home/>} />
+            <Route path="/signout" element={<SignOut setMe={setMe}/>} />
             <Route path='/articles' element={<Articles menuShow={menuShow} handleShow={handleShow}/>} />
           </Routes>
         </div>

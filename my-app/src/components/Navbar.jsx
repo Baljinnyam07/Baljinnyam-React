@@ -9,11 +9,12 @@ export default function Navbar() {
     { label: "Files", link: "#" },
   ];
   const dropdownItems = [
-    { label: "Home", link: "#" },
+    { label: "Home", link: "/home" },
+    { label: "Email", link: "/" },
     { label: "Inbox", link: "#" },
     { label: "Settings", link: "#" },
     { label: "---", link: "#" },
-    { label: "Sign out", link: "#" },
+    { label: "Sign out", link: "/signout" },
   ];
   return (
     <>
