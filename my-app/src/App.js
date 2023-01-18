@@ -1,10 +1,7 @@
 import './styles/bootstrap.css'
 import Navbar from './components/Navbar';
-import Select from 'react-select';
-import DynamicModal from './components/utils/DynamicModal';
 import { useEffect, useState } from 'react';
-import PostCreate from './components/Blogs/PostCreate';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, } from 'react-router-dom';
 import Home from './pages/Home';
 import Articles from './pages/Articles';
 import Signin from './pages/Signin';
@@ -12,22 +9,15 @@ import SignInError from './pages/SigninError';
 import Signup from './pages/Signup';
 import SigninSuccess from './pages/SigninSuccess';
 import SignOut from './pages/SignOut';
+import Categories from './pages/Categories';
+import { ToastContainer } from 'react-toastify';
 
 
 
 function App() {
   const [me, setMe] = useState(undefined)
-  const [show, setShow] = useState(false);
   const [menuShow, setMenuShow] = useState(false);
   
-  const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-  
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(()=>{
     const myData = localStorage.getItem('me');
@@ -35,7 +25,6 @@ function App() {
       setMe(JSON.parse(myData));
     }
   }, []);
-  const navigate = useNavigate()
  
   if(!me){
     return (
@@ -61,13 +50,15 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path="/signout" element={<SignOut setMe={setMe}/>} />
-            <Route path='/articles' element={<Articles menuShow={menuShow} handleShow={handleShow}/>} />
+            <Route path='/categories' element={<Categories/>} />
+            <Route path='/articles' element={<Articles menuShow={menuShow} />} />
           </Routes>
         </div>
       </div>
       
-      <Select className="mt-3" value={"Asdas"} options={options}/>
-      <DynamicModal show={show} handleClose={handleClose} title= 'Create post' content={<PostCreate/>}/>
+      <ToastContainer/>
+      
+      
     </>
   )
 }
