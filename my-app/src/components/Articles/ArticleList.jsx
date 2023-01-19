@@ -2,13 +2,13 @@ import { SlPencil, SlTrash } from "react-icons/sl";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import parse from "html-react-parser";
 function TableRow({ item, index, onEdit }) {
   const navigate = useNavigate();
   const [deleted, setDeleted] = useState(false);
   const deleteItem = () => {
     let statusCode;
-    fetch("https://demo-api-one.vercel.app/api/categories", {
+    fetch("https://demo-api-one.vercel.app/api/articles", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -43,34 +43,33 @@ function TableRow({ item, index, onEdit }) {
       <th scope="row">{index}</th>
       <td>{item.name}</td>
       <td>{item.description}</td>
+      <td>{item.text && parse(item.text)}</td>
       <td style={{ whiteSpace: "nowrap" }}>
         <button
           className="btn btn-sm btn-outline-primary me-2"
           onClick={() => onEdit(item)}
         >
-          Edit <SlPencil />
+          <SlPencil />
         </button>
         <button className="btn btn-sm btn-outline-danger" onClick={deleteItem}>
-          Delete <SlTrash />
+          <SlTrash />
         </button>
       </td>
     </tr>
   );
 }
-export default function CategoryList({ items, onEdit }) {
+export default function ArticleList({ items, onEdit }) {
   console.log(items);
   return (
     <div>
       <table className="table table-bordered table-hover">
-        <thead>
+        <tbody>
           <tr>
             <th width="1">#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th width="1">Actions</th>
+            <th width="1">Name</th>
+            <th width="1">Description</th>
+            <th>Text</th>
           </tr>
-        </thead>
-        <tbody>
           {items?.map((item, index) => {
             return (
               <TableRow

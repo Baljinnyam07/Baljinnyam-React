@@ -4,18 +4,12 @@ import Heading from "../components/Heading";
 import { toast } from "react-toastify";
 import DynamicModal from "../components/utils/DynamicModal";
 import CategoryCreate from "../components/Categories/CategoryCreate";
+import CategoryEdit from "../components/Categories/CategoryEdit";
 
 export default function Categories() {
   const [modalShow, setModalShow] = useState(false);
   const [categories, setCategories] = useState([]);
-
-  const handleClose = () => {
-    setModalShow(false);
-  };
-
-  const handleShow = () => {
-    setModalShow(true);
-  };
+  const [modalContent, setModalContent] = useState(<></>);
 
   useEffect(() => {
     fetch("https://demo-api-one.vercel.app/api/categories")
@@ -28,18 +22,47 @@ export default function Categories() {
         toast.error("Aldaa garlaa");
       });
   }, []);
+  const modalClose = () => {
+    setModalContent(<></>);
+    setModalShow(false);
+  };
+  const afterSubmit = (category) => {
+    modalClose();
+    setCategories([...categories, category]);
+  };
+
+  const showCreateModal = () => {
+    setModalContent(<CategoryCreate afterSubmit={afterSubmit} />);
+    setModalShow(true);
+  };
+
+  const afterEdit = (category) => {
+    modalContent();
+    let newCategories = categories.map((cat) => {
+      if (cat.id === category.id) {
+        return category;
+      }
+      return cat;
+    });
+    setCategories(newCategories);
+  };
+
+  const showEditModal = (category) => {
+    setModalContent(<CategoryEdit category={category} afterEdit={afterEdit} />);
+    setModalShow(true);
+  };
 
   return (
     <>
       <div className="container-sm body-container">
-        <Heading title="Categories" handleShow={handleShow} />
-        <CategoryList items={categories} />
+        <Heading title="Categories" handleShow={showCreateModal} />
+        <CategoryList items={categories} onEdit={showEditModal} />
       </div>
       <DynamicModal
         show={modalShow}
-        handleClose={handleClose}
-        title="Create post"
-        content={<CategoryCreate />}
+        handleClose={modalClose}
+        title="Create category"
+        content={modalContent}
       />
     </>
   );
