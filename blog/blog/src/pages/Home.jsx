@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import Card from "../components/Card";
 
 export default function Home() {
   const articles = [
@@ -25,11 +25,11 @@ export default function Home() {
     <main>
       <div className="container">
         <div className="row">
-          {articles.map((article) => {
+          {articles.map((article) => (
             <div className="col-md-3 col-sm-6 col-12">
               <Card title={article.title} image={article.image} />
-            </div>;
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </main>
