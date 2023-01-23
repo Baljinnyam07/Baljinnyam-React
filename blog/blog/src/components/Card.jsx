@@ -10,7 +10,7 @@ export default function Card({ image, title, index, articleId }) {
         onClick={() => {
           clickBtn();
         }}
-        to={"/articles/" + articleId}
+        to={"/articles/"+articleId}
       >
         <div className="card">
           <div className="card-img">

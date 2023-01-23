@@ -16,9 +16,9 @@ export default function Home() {
     <main>
       <div className="container">
         <div className="row">
-          {categories.map((category) => (
-            <div className="col-md-3 col-sm-6 col-12">
-              <Card title={category.name} image={category.imageUrl} />
+          {categories.map((category, index) => (
+            <div className="col-md-3 col-sm-6 col-12" key={index}>
+              <Card title={category.name} image={category.imageUrl} id={category.id} articleId={category.id} />
             </div>
           ))}
         </div>

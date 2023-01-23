@@ -1,8 +1,9 @@
 import Home from "./pages/Home";
 import Header from './components/Header'
-import Text from "./components/Text";
 import { Route, Routes } from "react-router-dom";
 import ChatScreen from "./components/ChatScreen";
+import Articles from "./components/Articles";
+;
 // import Card from "./components/Card";
 // import ChatScreen from "./components/ChatScreen";
 // import Counter from "./components/Counter";
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
     
-        <Route path="/text" element={<Text/>} />
+        <Route path="/articles/:id" element={<Articles/>} />
 
         <Route path='/ChatScreen' element={<ChatScreen/>}/>
   
