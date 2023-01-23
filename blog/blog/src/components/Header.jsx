@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
@@ -41,6 +42,9 @@ export default function Header() {
                   <a href="/">{cat.name}</a>
                 </li>
               ))}
+              <li>
+                <Link to="/ChatScreen">Chat</Link>
+              </li>
             </ul>
           </nav>
         </div>
