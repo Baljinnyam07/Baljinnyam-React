@@ -1,10 +1,23 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function SigninSuccess({ setMe }) {
   const navigate = useNavigate();
   useEffect(() => {
     let status = 200;
+    axios
+      .post("https://demo-api-one.vercel.app/api/users/me")
+      .then((res) => {
+        setMe(res.data.body);
+        localStorage.setItem("me", res.data.body);
+        navigate("/");
+        console.log(res.data);
+      })
+      .catch(() => {
+        navigate("/signin");
+        console.log("Aldaa garlaa");
+      });
     fetch("https://demo-api-one.vercel.app/api/users/me", {
       method: "POST",
       headers: {

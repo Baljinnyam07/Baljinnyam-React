@@ -3,10 +3,27 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
+import axios from "axios";
+
 function TableRow({ item, index, onEdit }) {
   const navigate = useNavigate();
   const [deleted, setDeleted] = useState(false);
   const deleteItem = () => {
+    // axios
+    //   .delete("https://demo-api-one.vercel.app/api/articles", {
+    //     data: { id: item.id },
+    //   })
+    //   .then(() => {
+    //     toast.success("Amjilttai ustgalaa");
+    //     setDeleted(true);
+    //   })
+    //   .catch((err) => {
+    //     if (err.response.status === 401 || err.response.status === 403) {
+    //       navigate("/signout");
+    //     }
+    //     toast.error(err.response.data.message);
+    //   });
+
     let statusCode;
     fetch("https://demo-api-one.vercel.app/api/articles", {
       method: "DELETE",

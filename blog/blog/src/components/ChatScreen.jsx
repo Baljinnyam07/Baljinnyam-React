@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import dayjs from "dayjs";
+import { axios } from "axios";
 
 export default function ChatScreen() {
   const intRef = useRef(null);

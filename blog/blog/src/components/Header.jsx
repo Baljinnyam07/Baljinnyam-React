@@ -2,15 +2,19 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    fetch("https://demo-api-one.vercel.app/api/categories")
-      .then((res) => res.json())
-      .then((data) => {
-        setCategories(data.body);
-      });
+    axios.get("https://demo-api-one.vercel.app/api/categories").then((res) => {
+      setCategories(res.data.body);
+    });
+    // fetch("https://demo-api-one.vercel.app/api/categories")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setCategories(data.body);
+    //   });
   }, []);
   return (
     <header>
