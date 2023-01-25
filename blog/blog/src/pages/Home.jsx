@@ -6,14 +6,11 @@ import axios from "axios";
 export default function Home() {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    axios
-      .get("https://demo-api-one.vercel.app/api/articles")
-      .then((res) => setCategories(res.data.body))
-      .then((data) => {
-        setCategories(data.body);
-      });
+    axios.get("http://localhost:8000/categories").then((res) => {
+      setCategories(res.data);
+    });
   }, []);
-  console.log(categories[0]);
+
   return (
     <main>
       <div className="container">
@@ -21,7 +18,8 @@ export default function Home() {
           {categories.map((category, index) => (
             <div className="col-md-3 col-sm-6 col-12" key={index}>
               <Card
-                title={category.name}
+                title={category.description}
+                text={category.text}
                 image={category.imageUrl}
                 id={category.id}
                 articleId={category.id}

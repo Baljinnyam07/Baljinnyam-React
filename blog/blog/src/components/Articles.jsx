@@ -9,11 +9,10 @@ export default function Articles() {
   const { id } = useParams();
   const [article, setArticle] = useState({});
   useEffect(() => {
-    axios
-      .get("https://demo-api-one.vercel.app/api/articles/" + id)
-      .then((res) => {
-        setArticle(res.data.body);
-      });
+    axios.get("http://localhost:8000/categories/" + id).then((res) => {
+      setArticle(res.data);
+      console.log(res.data[0].categories[0]);
+    });
   }, []);
 
   return (
@@ -21,8 +20,7 @@ export default function Articles() {
       <Container>
         <Row xs={1} md={2}>
           <Col>
-            <h1>{article.name}</h1>
-            <h2>{article.description}</h2>
+            <h1>{article.description}</h1>
           </Col>
           <Col>
             <h3>
