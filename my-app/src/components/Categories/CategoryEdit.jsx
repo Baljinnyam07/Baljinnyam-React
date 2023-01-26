@@ -10,15 +10,16 @@ export default function CategoryEdit({ afterEdit, category }) {
   const [description, setDescription] = useState(category?.description);
 
   const submit = () => {
-    .put('http://localhost:8000/categories/' + category.id, { name })
-    .then((res) =>{
-      toast.success('Amjilttai nemegdew');
-      afterEdit(res.data);
-    })
-    .catch((err) =>{
-      console.log(err);
-      toast.error('Aldaa garlaa')
-    })
+    axios
+      .put("http://localhost:8000/categories/" + category.id, { name })
+      .then((res) => {
+        toast.success("Amjilttai nemegdew");
+        afterEdit(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Aldaa garlaa");
+      });
   };
   return (
     <Form
