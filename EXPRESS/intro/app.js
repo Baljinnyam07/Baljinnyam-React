@@ -63,23 +63,23 @@ let categories = [
         },
     ];
 
-// const headers = [
-//     {
-//         id:1,
-//         name:'Blog',
-//         categories,
-//     },
-//     {
-//         id:2,
-//         name:'Technology'
-//     },{
-//         id:3,
-//         name:'Бизнес'
-//     },{
-//         id:4,
-//         name:'Toy'
-//     }
-// ]
+const headers = [
+    {
+        id:1,
+        name:'Blog',
+        categories,
+    },
+    {
+        id:2,
+        name:'Technology'
+    },{
+        id:3,
+        name:'Бизнес'
+    },{
+        id:4,
+        name:'Toy'
+    }
+]
 
 let nextCatId = categories.length
 
@@ -88,10 +88,10 @@ app.get('/categories', (request, response)=>{
     response.json(categories)
 });
 
-// app.get('/headers', (request, response) =>{
-//     response.status(200);
-//     response.json(headers)
-// })
+app.get('/headers', (request, response) =>{
+    response.status(200);
+    response.json(headers)
+})
 
 app.get('/categories/:id', (req,res)=>{
     const { id } =req.params;
