@@ -1,7 +1,11 @@
 const { response } = require('express');
 const express = require('express');
 
-const cors = require('cors')
+const cors = require('cors');
+
+const bodyParser = require('body-parser');
+
+const jsonParser = bodyParser.json();
 
 const app = express();
 
@@ -9,9 +13,8 @@ app.use(cors());
 
 const port = 8000;
 
-const categories = [
+let categories = [
     {
-
         id:1,
         name:'Blog',
         imageUrl:'https://mgl.gogo.mn/newsn/thumbnail/1000/images/c/2023/01/-25012023-1674613126-1936153437-Picture1.jpg',
@@ -60,41 +63,77 @@ const categories = [
         },
     ];
 
-const headers = [
-    {
-        id:1,
-        name:'Blog',
-        categories,
-    },
-    {
-        id:2,
-        name:'Technology'
-    },{
-        id:3,
-        name:'Бизнес'
-    },{
-        id:4,
-        name:'Toy'
-    }
-]
+// const headers = [
+//     {
+//         id:1,
+//         name:'Blog',
+//         categories,
+//     },
+//     {
+//         id:2,
+//         name:'Technology'
+//     },{
+//         id:3,
+//         name:'Бизнес'
+//     },{
+//         id:4,
+//         name:'Toy'
+//     }
+// ]
+
+let nextCatId = categories.length
 
 app.get('/categories', (request, response)=>{
     response.status(200);
     response.json(categories)
 });
 
-app.get('/headers', (request, response) =>{
-    response.status(200);
-    response.json(headers)
-})
+// app.get('/headers', (request, response) =>{
+//     response.status(200);
+//     response.json(headers)
+// })
 
 app.get('/categories/:id', (req,res)=>{
-    const {id} =req.params;
-    const filteredArr = headers.filter((e)=> {
-        return e.id === Number(id)
-    })
-    res.json(filteredArr)
+    const { id } =req.params;
+    let category = null;
+    for(const row of categories){
+        if( id == row.id){
+            category = cat;
+            break;
+        }
+    }
+
+    res.json(category)
 })
+
+app.delete('/categories/:id', (req, res )=>{
+    const { id } =req.params;
+    categories = categories.filter((row) => row.id !== id);
+    res.json(id);
+});
+
+
+app.post('/categories', jsonParser,(req,res)=>{
+    const { name, description } =req.body;
+    const newCategory = {id: nextCatId++, name,description};
+    categories.push(newCategory);
+    res.send(newCategory)
+});
+
+app.put('/categories', jsonParser,(req,res)=>{
+    const { id } =req.params
+    const { name, description } =req.body;
+    
+    let updatedCat;
+    categories = categories.map((row) =>{
+        if(row.id === Number(id)){
+            updatedCat = { id: Number(id), name};
+            return updatedCat
+        }
+        return row
+    })
+    res.json(updatedCat)
+});
 
 
 app.listen(port, ()=>{

@@ -1,4 +1,5 @@
 import Form from "react-bootstrap/Form";
+import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,37 +8,17 @@ import { toast } from "react-toastify";
 export default function CategoryEdit({ afterEdit, category }) {
   const [name, setName] = useState(category?.name);
   const [description, setDescription] = useState(category?.description);
-  const navigate = useNavigate();
 
   const submit = () => {
-    let statusCode;
-    fetch("https://demo-api-one.vercel.app/api/categories", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      body: JSON.stringify({ id: category?.id, name, description }),
+    .put('http://localhost:8000/categories/' + category.id, { name })
+    .then((res) =>{
+      toast.success('Amjilttai nemegdew');
+      afterEdit(res.data);
     })
-      .then((res) => {
-        statusCode = res.status;
-        return res.json();
-      })
-      .then((data) => {
-        if (statusCode === 200) {
-          toast.success("Амжилттай нэмэгдлээ");
-          afterEdit(data.body);
-        } else {
-          if (statusCode === 403 || statusCode === 401) {
-            navigate("/signout");
-          }
-          toast.error(data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Алдаа гарлаа");
-      });
+    .catch((err) =>{
+      console.log(err);
+      toast.error('Aldaa garlaa')
+    })
   };
   return (
     <Form

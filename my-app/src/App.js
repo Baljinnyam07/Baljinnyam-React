@@ -15,29 +15,29 @@ import { ToastContainer } from 'react-toastify';
 
 
 function App() {
-  const [me, setMe] = useState(undefined)
   const [menuShow, setMenuShow] = useState(false);
+  // const [me, setMe] = useState(undefined)
   
 
-  useEffect(()=>{
-    const myData = localStorage.getItem('me');
-    if(myData !== "undefined"){
-      setMe(JSON.parse(myData));
-    }
-  }, []);
+  // useEffect(()=>{
+  //   const myData = localStorage.getItem('me');
+  //   if(myData !== "undefined"){
+  //     setMe(JSON.parse(myData));
+  //   }
+  // }, []);
  
-  if(!me){
-    return (
-      <>
-        <Routes>
-        <Route path="/signin" element={<Signin/>} />
-        <Route path="/signin/success" element={<SigninSuccess setMe={setMe}/>} />
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="*" element={<SignInError/>}/>
-      </Routes>
-      </>
-    );
-  }
+  // if(!me){
+  //   return (
+  //     <>
+  //       <Routes>
+  //       <Route path="/signin" element={<Signin/>} />
+  //       <Route path="/signin/success" element={<SigninSuccess setMe={setMe}/>} />
+  //       <Route path="/signup" element={<Signup/>}/>
+  //       <Route path="*" element={<SignInError/>}/>
+  //     </Routes>
+  //     </>
+  //   );
+  // }
 
   return ( 
 
@@ -49,7 +49,7 @@ function App() {
         <div className="off-menu-sibling">
           <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path="/signout" element={<SignOut setMe={setMe}/>} />
+            {/* <Route path="/signout" element={<SignOut setMe={setMe}/>} /> */}
             <Route path='/categories' element={<Categories/>} />
             <Route path='/articles' element={<Articles menuShow={menuShow} />} />
           </Routes>
