@@ -11,7 +11,7 @@ export default function Products() {
   const [page, setPage] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/products?pageSize=6").then((res) => {
+    axios.get("http://localhost:8000/products?pageSize=10").then((res) => {
       setPage(res.data);
     });
   }, []);
@@ -68,7 +68,11 @@ export default function Products() {
             <li className={`page-item ${page.page === 1 && "disabled"}`}>
               <span className="page-link">Previous</span>
             </li>
+            <li className={`page-item ${page.page === 1 && "hidden"}`}>
+              <span>{`.  .  .`}</span>
+            </li>
             {getPaginations()}
+            
             <li
               className={`page-item ${
                 page.page === page.totalPages && "active"
