@@ -135,40 +135,43 @@ app.get('/products', (req, res)=>{
 
     start = (page - 1)*pageSize;
     end = start + pageSize;
-    q = [];
-    priceTo=[];
-    priceFrom=[]
 
-    // function compareNumbers(a, b) {
-    //  return a - b;
+    
+        
+
+    // for(let i = 0; i < products.length; i++)
+    // {
+    // priceFrom += priceTo.sort(compareNumbers)
+    
+    
+    // if(products[i].name === 'Crush - Cream Soda')
+    // {
+    //     q = products[i];
+        
+    // }
     // }
 
-    // priceTo = Number(products[i].price);
-    
-    
+    const newProducts = products.filter((product) =>{
+        let matching = true;
+        if(q){
+            matching = product.name.toLowerCase().includes(q.toLocaleLowerCase());
+        }
+        if(priceFrom){priceFrom < product.price;}
+        return matching;
+    });
+    const items = newProducts.slice(start, end);
+    // const items = newProductsPrice
 
-    for(let i = 0; i < products.length; i++)
-    {
-    // priceFrom += `${priceTo.sort(compareNumbers)} `
     
-    if(products[i].name === 'Crush - Cream Soda')
-    {
-        q = products[i];
-        
-    }
-    }
-
-    const items = products.slice(start, end);
-
 
     res.json({
-        total:products.length,
+        total:newProducts.length,
         totalPages: Math.ceil(products.length/pageSize),
         q,
         page,
         pageSize, 
-        q:q.name,
-        items
+        // priceTo,
+        items,
 
     });
 });

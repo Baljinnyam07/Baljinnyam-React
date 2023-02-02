@@ -4,26 +4,42 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import relateTime from "dayjs/plugin/relativeTime";
 import currencyFormatter from "../utils/currencyFormatter";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 dayjs.extend(relateTime);
 
 export default function Products() {
+  const [isReady, setIsReady] = useState(false);
+
   const [page, setPage] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [locationQuery, setLocationQuery] = useState("");
+  const [sortPrice, setSortPrice] = useState(0);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:8000/products?pageSize=${pageSize}&page=${currentPage}`
-      )
-      .then((res) => {
-        setPage(res.data);
-      });
-  }, [currentPage, pageSize]);
+    const newQuery = new URLSearchParams();
+    newQuery.set("pageSize", pageSize);
+    newQuery.set("page", currentPage);
+    if (searchQuery !== "") {
+      newQuery.set("q", searchQuery);
+    }
+    setLocationQuery(newQuery.toString());
+  }, [currentPage, pageSize, searchQuery]);
+
+  useEffect(() => {
+    navigate(`/products?${locationQuery}`);
+  }, [locationQuery]);
+
+  useEffect(() => {
+    if (isReady) {
+      getResults();
+    }
+  }, [isReady]);
 
   useEffect(() => {
     const seasrchParams = new URLSearchParams(location.search);
@@ -33,7 +49,29 @@ export default function Products() {
     if (seasrchParams.has("pageSize")) {
       setPageSize(Number(seasrchParams.get("pageSize")));
     }
+    if (seasrchParams.has("q")) {
+      setSearchQuery(seasrchParams.get("q"));
+    }
+    if (isReady) {
+      getResults();
+    } else {
+      setIsReady(true);
+    }
   }, [location]);
+
+  const getResults = () => {
+    const urlParams = new URLSearchParams();
+    urlParams.set("pageSize", pageSize);
+    urlParams.set("page", currentPage);
+    if (searchQuery !== "") {
+      urlParams.set("q", searchQuery);
+    }
+    axios
+      .get(`http://localhost:8000/products?${urlParams.toString()}`)
+      .then((res) => {
+        setPage(res.data);
+      });
+  };
 
   if (!page) {
     return (
@@ -98,18 +136,36 @@ export default function Products() {
           <input
             className="w-25"
             type="range"
-            min="10000"
+            min="100000"
             max="1000000"
-            step="50000"
-            onChange={(e) => console.log(e.target.value)}
+            step="100000"
+            value={sortPrice}
+            onChange={(e) => setSortPrice(e.target.value)}
           ></input>
         </div>
         <div className="d-flex justify-content-end mb-4">
+          <label className="me-4">
+            Нэрээр хайх
+            <input
+              type="text"
+              className="from-control"
+              placeholder="Барааны нэр..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+          </label>
+
           <label>
             Хуудаслалт &nbsp;
             <select
               className="form-control d-inline-block w-auto"
-              onChange={(e) => setPageSize(e.target.value)}
+              onChange={(e) => {
+                setCurrentPage(1);
+                setPageSize(e.target.value);
+              }}
               value={pageSize}
             >
               <option value="10">10</option>
@@ -121,7 +177,7 @@ export default function Products() {
           </label>
         </div>
         <div className="row gy-4">
-          {page.items.map((product) => {
+          {page?.items?.map((product) => {
             return (
               <div className="col-sm-4" key={product.id}>
                 <div className="product-card">
