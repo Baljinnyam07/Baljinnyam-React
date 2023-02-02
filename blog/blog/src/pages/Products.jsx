@@ -16,7 +16,7 @@ export default function Products() {
   const [pageSize, setPageSize] = useState(12);
   const [searchQuery, setSearchQuery] = useState("");
   const [locationQuery, setLocationQuery] = useState("");
-  const [sortPrice, setSortPrice] = useState(0);
+  const [sortPrice, setSortPrice] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,8 +28,13 @@ export default function Products() {
     if (searchQuery !== "") {
       newQuery.set("q", searchQuery);
     }
+    if(sortPrice !==""){
+      newQuery.set('priceFrom',sortPrice)
+    }
     setLocationQuery(newQuery.toString());
-  }, [currentPage, pageSize, searchQuery]);
+  }, [currentPage, pageSize, searchQuery,sortPrice]);
+
+  
 
   useEffect(() => {
     navigate(`/products?${locationQuery}`);
@@ -52,6 +57,9 @@ export default function Products() {
     if (seasrchParams.has("q")) {
       setSearchQuery(seasrchParams.get("q"));
     }
+    if (seasrchParams.has("priceFrom")) {
+      setSortPrice(seasrchParams.get("priceFrom"));
+    }
     if (isReady) {
       getResults();
     } else {
@@ -65,6 +73,9 @@ export default function Products() {
     urlParams.set("page", currentPage);
     if (searchQuery !== "") {
       urlParams.set("q", searchQuery);
+    }
+    if (sortPrice !== "") {
+      urlParams.set("priceFrom", sortPrice);
     }
     axios
       .get(`http://localhost:8000/products?${urlParams.toString()}`)
@@ -138,9 +149,9 @@ export default function Products() {
             type="range"
             min="100000"
             max="1000000"
-            step="100000"
+            step="50000"
             value={sortPrice}
-            onChange={(e) => setSortPrice(e.target.value)}
+            onChange={(e) => {setSortPrice(e.target.value);setCurrentPage(1)}}
           ></input>
         </div>
         <div className="d-flex justify-content-end mb-4">

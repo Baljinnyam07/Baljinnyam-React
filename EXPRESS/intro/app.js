@@ -156,7 +156,7 @@ app.get('/products', (req, res)=>{
         if(q){
             matching = product.name.toLowerCase().includes(q.toLocaleLowerCase());
         }
-        if(priceFrom){priceFrom < product.price;}
+        if(priceFrom) return priceFrom < product.price
         return matching;
     });
     const items = newProducts.slice(start, end);
@@ -170,7 +170,7 @@ app.get('/products', (req, res)=>{
         q,
         page,
         pageSize, 
-        // priceTo,
+        priceFrom,
         items,
 
     });
