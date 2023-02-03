@@ -176,7 +176,37 @@ app.get('/products', (req, res)=>{
     });
 });
 
+const menuPositions = fs.readFileSync('menuPositions.json', 'utf-8');
 
+
+app.get('/menu-positions', (req, res)=>{
+    res.json(menuPositions);
+})
+
+app.get('/menu-positions/:id', (req,res)=>{
+    const { id } =req.params;
+    let position = null;
+    for(const row of menuPositions){
+        if( id == row.id){
+            position = cat;
+            break;
+        }
+    }
+    res.json(position)
+})
+
+let nextPosId = menuPositions.length;
+
+
+app.post('/menu-positions', jsonParser,(req,res)=>{
+    const { name, alias } =req.body;
+    const newPosition = {id: nextPosId++, name};
+    newPosition.push(newPosition);
+    fs.writeFileSync('menuPositions.json', JSON.stringify(menuPositions));
+    res.send(newPosition)
+});
+
+const menus = [];
 
 app.listen(port, ()=>{
     console.log('http//localhost:'+port)

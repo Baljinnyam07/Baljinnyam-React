@@ -1,16 +1,12 @@
 import './styles/bootstrap.css'
 import Navbar from './components/Navbar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Routes, Route, } from 'react-router-dom';
 import Home from './pages/Home';
 import Articles from './pages/Articles';
-import Signin from './pages/Signin';
-import SignInError from './pages/SigninError';
-import Signup from './pages/Signup';
-import SigninSuccess from './pages/SigninSuccess';
-import SignOut from './pages/SignOut';
 import Categories from './pages/Categories';
 import { ToastContainer } from 'react-toastify';
+import MenuPositions from './pages/MenuPositions';
 
 
 
@@ -49,6 +45,7 @@ function App() {
         <div className="off-menu-sibling">
           <Routes>
             <Route path='/' element={<Home/>} />
+            <Route path='/menu-positions' element={<MenuPositions/>} />
             {/* <Route path="/signout" element={<SignOut setMe={setMe}/>} /> */}
             <Route path='/categories' element={<Categories/>} />
             <Route path='/articles' element={<Articles menuShow={menuShow} />} />
