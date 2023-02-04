@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Heading from "../components/Heading";
-import MenuPositionList from "../components/Menu/Positions/PositionList";
+import MenuPositionList from "../components/Menu/Positions/MenuPositionList";
 import axios from "axios";
 import DynamicModal from "../components/utils/DynamicModal";
-import MenuPositionCreate from "../components/Menu/Positions/PositionCreate";
+import MenuPositionCreate from "../components/Menu/Positions/MenuPositionCreate";
 
 export default function MenuPositions() {
   const [show, setShow] = useState(false);

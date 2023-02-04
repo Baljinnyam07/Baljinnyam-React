@@ -1,11 +1,9 @@
 import { SlPencil, SlTrash } from "react-icons/sl";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function TableRow({ item, index, onEdit }) {
-  const navigate = useNavigate();
   const [deleted, setDeleted] = useState(false);
   const deleteItem = () => {
     axios
