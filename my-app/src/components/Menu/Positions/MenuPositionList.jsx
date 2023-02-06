@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { SlPencil, SlTrash } from "react-icons/sl";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { SlPencil, SlTrash } from 'react-icons/sl';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const ListItem = ({ item, index, onEdit }) => {
   const [deleted, setDeleted] = useState(false);
 
   const deleteItem = () => {
     axios
-      .delete("http://localhost:8000/menu-positions/" + item.id)
+      .delete('http://localhost:8000/menu-positions/' + item.id)
       .then(() => {
-        toast.success("Амжилттай устгалаа");
+        toast.success('Амжилттай устгалаа');
         setDeleted(true);
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Алдаа гарлаа");
+        toast.error('Алдаа гарлаа');
       });
   };
 
@@ -29,11 +29,8 @@ const ListItem = ({ item, index, onEdit }) => {
         <Link to={`/menu-positions/${item.id}`}>{item.name}</Link>
       </td>
       <td>{item.alias}</td>
-      <td style={{ whiteSpace: "nowrap" }}>
-        <button
-          className="btn btn-sm btn-outline-primary me-2"
-          onClick={() => onEdit(item)}
-        >
+      <td style={{ whiteSpace: 'nowrap' }}>
+        <button className="btn btn-sm btn-outline-primary me-2" onClick={() => onEdit(item)}>
           <SlPencil />
         </button>
         <button className="btn btn-sm btn-outline-danger" onClick={deleteItem}>
@@ -57,12 +54,7 @@ export default function MenuPositionList({ items, onEdit }) {
       </thead>
       <tbody>
         {items?.map((item, index) => (
-          <ListItem
-            item={item}
-            index={index + 1}
-            key={`list-item-${index}`}
-            onEdit={onEdit}
-          />
+          <ListItem item={item} index={index + 1} key={`list-item-${index}`} onEdit={onEdit} />
         ))}
       </tbody>
     </table>

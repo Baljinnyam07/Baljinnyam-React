@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Pie } from "react-chartjs-2";
+import { Bar,} from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -90,9 +90,7 @@ export default function Home() {
         <div className="col-12">
           <Bar options={options} data={data} />;
         </div>
-        <div className="col-6">
-          <Pie data={pieData} />
-        </div>
+        
       </div>
     </div>
   );
