@@ -1,18 +1,30 @@
 import './styles/bootstrap.css'
+import './styles/style.css'
 import Navbar from './components/Navbar';
-import { useState } from 'react';
-import { Routes, Route, } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Routes, Route, Link, } from 'react-router-dom';
 import Home from './pages/Home';
 import Articles from './pages/Articles';
 import Categories from './pages/Categories';
-import { ToastContainer } from 'react-toastify';
 import MenuPositions from './pages/MenuPositions';
 import Menus from './pages/Menus';
+import axios from 'axios';
 
 
 
 function App() {
   const [menuShow, setMenuShow] = useState(false);
+
+  const [menus, setMenus] = useState([]);
+
+  useEffect(()=>{
+    axios.get('http://localhost:8000/menus/admin')
+    .then((res)=>{
+      setMenus(res.data)
+    })
+  },[])
+
+
   // const [me, setMe] = useState(undefined)
   
 
@@ -39,26 +51,31 @@ function App() {
   return ( 
 
     <>
-    
-    <Navbar onToggle={() => setMenuShow(!menuShow)} />
+    <>
+      <Navbar onToggle={() => setMenuShow(!menuShow)} />
       <div className="main-wrapper">
-        <div className={`off-menu bg-dark ${menuShow && 'show'}`}>Test</div>
+        <div className={`off-menu bg-dark ${menuShow && "show"}`}>
+          <ul></ul>
+          {menus.map((menu) => {
+            return (
+              <li key={menu.id}>
+                <Link to={menu.link}>{menu.name}</Link>
+              </li>
+            );
+          })}
+        </div>
         <div className="off-menu-sibling">
           <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='/menu-positions' element={<MenuPositions/>} />
-            <Route path='/menu-positions/:id' element={<Menus/>} />
-
-            {/* <Route path="/signout" element={<SignOut setMe={setMe}/>} /> */}
-            <Route path='/categories' element={<Categories/>} />
-            <Route path='/articles' element={<Articles menuShow={menuShow} />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/menu-positions" element={<MenuPositions />} />
+            <Route path="/menu-positions/:id" element={<Menus />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/articles" element={<Articles />} />
+            {/* <Route path="/signout" element={<Signout setMe={setMe} />} /> */}
           </Routes>
         </div>
       </div>
-      
-      <ToastContainer/>
-      
-      
+    </>
     </>
   )
 }

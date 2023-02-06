@@ -10,17 +10,13 @@ function NavbarMenuItem({ item }) {
   );
 }
 
-export default function NavbarDropdown({ items = [], title = "" }) {
+export default function NavbarMenu({ items = [], title = "", onToggle }) {
   return (
     <>
-      <button
-        className="navbar-toggler"
-        type="button"
-        aria-label="Toggle navigation"
-      >
+      <button className="navbar-toggler" onClick={onToggle}>
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <div className="navbar-collapse">
         <Link className="navbar-brand" to="/">
           {title}
         </Link>
