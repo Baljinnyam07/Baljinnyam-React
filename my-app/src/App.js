@@ -7,6 +7,7 @@ import Articles from './pages/Articles';
 import Categories from './pages/Categories';
 import { ToastContainer } from 'react-toastify';
 import MenuPositions from './pages/MenuPositions';
+import Menus from './pages/Menus';
 
 
 
@@ -46,6 +47,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/menu-positions' element={<MenuPositions/>} />
+            <Route path='/menu-positions/:id' element={<Menus/>} />
+
             {/* <Route path="/signout" element={<SignOut setMe={setMe}/>} /> */}
             <Route path='/categories' element={<Categories/>} />
             <Route path='/articles' element={<Articles menuShow={menuShow} />} />
