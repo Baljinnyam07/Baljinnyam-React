@@ -1,62 +1,89 @@
-import { useState } from 'react';
-import { SlPencil, SlTrash } from 'react-icons/sl';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-const ListItem = ({ item, index, onEdit }) => {
-  const [deleted, setDeleted] = useState(false);
+import axios from "axios";
 
-  const deleteItem = () => {
+export default function MenuPositionCreate({ afterSubmit, positionId }) {
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("#");
+  const [ordering, setOrdering] = useState("0");
+  const [newTab, setNewTab] = useState(false);
+
+  const submit = () => {
     axios
-      .delete('http://localhost:8000/menu-positions/' + item.id)
-      .then(() => {
-        toast.success('Амжилттай устгалаа');
-        setDeleted(true);
+      .post("http://localhost:8000/menus", {
+        name,
+        link,
+        ordering,
+        positionId: Number(positionId),
+        newTab,
+      })
+      .then((res) => {
+        toast.success("Амжилттай нэмэгдлээ");
+        afterSubmit(res.data);
       })
       .catch((err) => {
         console.log(err);
-        toast.error('Алдаа гарлаа');
+        toast.error("Алдаа гарлаа");
       });
   };
 
-  if (deleted) return <></>;
-
   return (
-    <tr>
-      <th scope="row">{index}</th>
-      <td>
-        <Link to={`/menu-positions/${item.id}`}>{item.name}</Link>
-      </td>
-      <td>{item.alias}</td>
-      <td style={{ whiteSpace: 'nowrap' }}>
-        <button className="btn btn-sm btn-outline-primary me-2" onClick={() => onEdit(item)}>
-          <SlPencil />
-        </button>
-        <button className="btn btn-sm btn-outline-danger" onClick={deleteItem}>
-          <SlTrash />
-        </button>
-      </td>
-    </tr>
-  );
-};
-
-export default function MenuPositionList({ items, onEdit }) {
-  return (
-    <table className="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th width="1">#</th>
-          <th>Name</th>
-          <th>Alias</th>
-          <th width="1">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items?.map((item, index) => (
-          <ListItem item={item} index={index + 1} key={`list-item-${index}`} onEdit={onEdit} />
-        ))}
-      </tbody>
-    </table>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        submit();
+      }}
+    >
+      <Form.Group className="mb-3">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+          type="text"
+          placeholder="Name of the menu..."
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Link</Form.Label>
+        <Form.Control
+          value={link}
+          onChange={(e) => {
+            setLink(e.target.value);
+          }}
+          type="text"
+          placeholder="Link of the menu..."
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Ordering</Form.Label>
+        <Form.Control
+          value={ordering}
+          onChange={(e) => {
+            setOrdering(e.target.value);
+          }}
+          type="number"
+          placeholder="Ordering of the menu..."
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>New Tab?</Form.Label>
+        <Form.Check
+          type="checkbox"
+          label="Yes"
+          value={newTab}
+          onChange={(e) => {
+            setNewTab(e.target.checked);
+          }}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 }

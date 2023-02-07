@@ -139,9 +139,13 @@ app.delete("/menu-positions/:id", (req, res) => {
 let menus = JSON.parse(fs.readFileSync("menus.json", "utf-8"));
 let nextMenuId = menus.length + 1;
 
+app.get("/menus",(req,res)=>{
+  res.json(menus)
+})
+
 app.get("/menus", (req, res) => {
   const { positionId } = req.query;
-  if (!positionId) return res.statusCode(400).json("PositionId required!");
+  if (!positionId) return res.status(400).json("PositionId required!");
 
   const result = menus.filter((menu) => {
     return menu.positionId === Number(positionId);

@@ -18,7 +18,7 @@ function App() {
   const [menus, setMenus] = useState([]);
 
   useEffect(()=>{
-    axios.get('http://localhost:8000/menus/admin')
+    axios.get('http://localhost:8000/menus')
     .then((res)=>{
       setMenus(res.data)
     })
@@ -55,7 +55,8 @@ function App() {
       <Navbar onToggle={() => setMenuShow(!menuShow)} />
       <div className="main-wrapper">
         <div className={`off-menu bg-dark ${menuShow && "show"}`}>
-          <ul></ul>
+          <ul>
+
           {menus.map((menu) => {
             return (
               <li key={menu.id}>
@@ -63,6 +64,7 @@ function App() {
               </li>
             );
           })}
+          </ul>
         </div>
         <div className="off-menu-sibling">
           <Routes>
