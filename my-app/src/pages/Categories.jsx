@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CategoryList from "../components/Categories/CategoryList";
 import Heading from "../components/Heading";
 import { toast } from "react-toastify";
-import DynamicModal from "../components/utils/DynamicModal";
 import CategoryCreate from "../components/Categories/CategoryCreate";
 import CategoryEdit from "../components/Categories/CategoryEdit";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
+import { ModalContext } from "../contexts/ModalContext";
 
 export default function Categories() {
-  const [modalShow, setModalShow] = useState(false);
+  const { setModalContent, setModalShow, setModalTitle } =
+    useContext(ModalContext);
+
   const [categories, setCategories] = useState([]);
-  const [modalContent, setModalContent] = useState(<></>);
+  const params = useSearchParams();
 
   useEffect(() => {
     axios
@@ -23,22 +26,18 @@ export default function Categories() {
         toast.error("Aldaa garlaa");
       });
   }, []);
-  const modalClose = () => {
-    setModalContent(<></>);
-    setModalShow(false);
-  };
+
   const afterSubmit = (category) => {
-    modalClose();
     setCategories([...categories, category]);
   };
 
   const showCreateModal = () => {
+    setModalTitle("Category nemeh");
     setModalContent(<CategoryCreate afterSubmit={afterSubmit} />);
     setModalShow(true);
   };
 
   const afterEdit = (category) => {
-    modalContent();
     let newCategories = categories.map((cat) => {
       if (cat.id === category.id) {
         return category;
@@ -59,12 +58,6 @@ export default function Categories() {
         <Heading title="Categories" handleShow={showCreateModal} />
         <CategoryList items={categories} onEdit={showEditModal} />
       </div>
-      <DynamicModal
-        show={modalShow}
-        handleClose={modalClose}
-        title="Create category"
-        content={modalContent}
-      />
     </>
   );
 }

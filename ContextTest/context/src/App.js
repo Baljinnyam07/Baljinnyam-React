@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import './App.css';
 import Footer from './components/Footer';
 
@@ -7,14 +7,17 @@ export const ThemeContext = createContext("");
 
 
 function App() {
-  const [theme, setTheme] = useState("dark")
+  const [theme, setTheme] = useState(localStorage.getItem('themeColor') ||"light")
   const toggleTheme = () =>{
   if(theme === 'light'){
     setTheme('dark')
   }else{
     setTheme('light')
   }
-}
+};
+useEffect(()=>{
+  localStorage.setItem('themeColor' , theme)
+}, [theme]);
   return (
     <ThemeContext.Provider value={theme}>
       <div className={`wrapper + ${theme}`}>

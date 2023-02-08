@@ -4,7 +4,6 @@ import Heading from "../components/Heading";
 import MenuPositionList from "../components/Menu/Positions/MenuPositionList";
 import axios from "axios";
 import DynamicModal from "../components/utils/DynamicModal";
-import MenuPositionCreate from "../components/Menu/Positions/MenuPositionCreate";
 
 export default function MenuPositions() {
   const [show, setShow] = useState(false);
@@ -25,7 +24,7 @@ export default function MenuPositions() {
         <Heading title="Menu positions" handleShow={handleShow} />
         <MenuPositionList items={positions} />
       </div>
-      <DynamicModal
+      {/* <DynamicModal
         show={show}
         handleClose={handleClose}
         title="Create position "
@@ -37,7 +36,7 @@ export default function MenuPositions() {
             }}
           />
         }
-      />
+      /> */}
     </>
   );
 }

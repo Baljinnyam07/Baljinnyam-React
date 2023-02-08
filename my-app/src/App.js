@@ -9,12 +9,12 @@ import Categories from './pages/Categories';
 import MenuPositions from './pages/MenuPositions';
 import Menus from './pages/Menus';
 import axios from 'axios';
+import { ModalProvider } from './contexts/ModalContext';
 
 
 
 function App() {
   const [menuShow, setMenuShow] = useState(false);
-
   const [menus, setMenus] = useState([]);
 
   useEffect(()=>{
@@ -48,10 +48,8 @@ function App() {
   //   );
   // }
 
-  return ( 
-
-    <>
-    <>
+  return (
+    <ModalProvider>
       <Navbar onToggle={() => setMenuShow(!menuShow)} />
       <div className="main-wrapper">
         <div className={`off-menu bg-dark ${menuShow && "show"}`}>
@@ -77,8 +75,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </>
-    </>
+    </ModalProvider>
   )
 }
 

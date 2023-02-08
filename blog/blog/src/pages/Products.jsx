@@ -16,7 +16,7 @@ export default function Products() {
   const [pageSize, setPageSize] = useState(12);
   const [searchQuery, setSearchQuery] = useState("");
   const [locationQuery, setLocationQuery] = useState("");
-  const [sortPrice, setSortPrice] = useState('');
+  const [sortPrice, setSortPrice] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,13 +28,11 @@ export default function Products() {
     if (searchQuery !== "") {
       newQuery.set("q", searchQuery);
     }
-    if(sortPrice !==""){
-      newQuery.set('priceFrom',sortPrice)
+    if (sortPrice !== "") {
+      newQuery.set("priceFrom", sortPrice);
     }
     setLocationQuery(newQuery.toString());
-  }, [currentPage, pageSize, searchQuery,sortPrice]);
-
-  
+  }, [currentPage, pageSize, searchQuery, sortPrice]);
 
   useEffect(() => {
     navigate(`/products?${locationQuery}`);
@@ -151,7 +149,10 @@ export default function Products() {
             max="1000000"
             step="50000"
             value={sortPrice}
-            onChange={(e) => {setSortPrice(e.target.value);setCurrentPage(1)}}
+            onChange={(e) => {
+              setSortPrice(e.target.value);
+              setCurrentPage(1);
+            }}
           ></input>
         </div>
         <div className="d-flex justify-content-end mb-4">
