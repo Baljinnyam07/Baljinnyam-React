@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar,} from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -88,9 +88,8 @@ export default function Home() {
     <div className="container-sm body-container">
       <div className="row">
         <div className="col-12">
-          <Bar options={options} data={data} />;
+          <Bar options={options} data={data} />
         </div>
-        
       </div>
     </div>
   );

@@ -36,7 +36,43 @@
   padding-left: 200px;
 }
 
+@media screen and (max-width: 600px) {
+  .off-menu.show + .off-menu-sibling {
+    margin-right: -300px;
+  }
+}
+
 .navbar-toggler {
   display: block !important;
   margin-right: 20px !important;
+}
+
+.AccordionHeader {
+  background-color: 0;
+}
+
+.AccordionHeader li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.AccordionHeader li Link {
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 10px;
+}
+
+.off-menu ul li a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  text-transform: upppercase;
+}
+
+.off-menu ul li a:hover {
+  color: #f1f1f1;
 }

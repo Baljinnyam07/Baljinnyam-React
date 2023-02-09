@@ -10,6 +10,9 @@ import MenuPositions from './pages/MenuPositions';
 import Menus from './pages/Menus';
 import axios from 'axios';
 import { ModalProvider } from './contexts/ModalContext';
+import Accordion from 'react-bootstrap/Accordion';
+import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
+import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 
 
 
@@ -53,15 +56,35 @@ function App() {
       <Navbar onToggle={() => setMenuShow(!menuShow)} />
       <div className="main-wrapper">
         <div className={`off-menu bg-dark ${menuShow && "show"}`}>
-          <ul>
-
+          <Accordion  defaultActiveKey="0">
+            
+             
+                  
           {menus.map((menu) => {
-            return (
+            return (<>
+            <Accordion.Item  eventKey={menu.id}>
+            
+               <AccordionHeader className='AccordionHeader'>
               <li key={menu.id}>
                 <Link to={menu.link}>{menu.name}</Link>
               </li>
+              </AccordionHeader>
+              <AccordionBody>
+                  hi
+                </AccordionBody>
+            </Accordion.Item>
+            </>
             );
           })}
+                {/* <li><Link to={'/'}>Home</Link></li> */}
+              
+              <AccordionBody>
+                  hi
+                </AccordionBody>
+            
+          </Accordion>
+          <ul>
+        
           </ul>
         </div>
         <div className="off-menu-sibling">
