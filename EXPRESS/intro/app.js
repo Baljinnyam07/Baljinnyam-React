@@ -5,9 +5,19 @@ const fs = require("fs");
 
 const app = express();
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+const openaiPackage = require('openai');
+
+const configuration = new openaiPackage.Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new openaiPackage.OpenAIApi(configuration);
 app.use(cors());
 
 const port = 8000;
+
 
 let categories = JSON.parse(fs.readFileSync("categoryData.json", "utf8"));
 
@@ -44,6 +54,7 @@ app.delete("/categories/:id", (req, res) => {
 
 const bodyParser = require("body-parser");
 const { match } = require("assert");
+const { response } = require("express");
 const jsonParser = bodyParser.json();
 
 app.post("/categories", jsonParser, (req, res) => {
@@ -180,13 +191,26 @@ app.post("/menus", jsonParser, (req, res) => {
   return res.json(newMenu);
 });
 
+
 app.delete("/menus/:id", (req, res) => {
   const { id } = req.params;
   menus = menus.filter((row) => row.id !== Number(id));
   fs.writeFileSync("menus.json", JSON.stringify(menus));
   res.json(id);
 });
+app.get('/generate',async (req,res)=>{
+  let  {prompt} = req.query
+  const response = await openai.createImage({
+  prompt,
+  n: 1,
+  size: "1024x1024",
+});
+res.json(response.data.data[0].url)
+})
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log("http://localhost:" + port);
+
+  const response = await openai.listEngines()
+  console.log(response)
 });

@@ -1,31 +1,13 @@
-import { useState, useEffect, useContext } from "react";
 import CategoryList from "../components/Categories/CategoryList";
 import Heading from "../components/Heading";
-import { toast } from "react-toastify";
 import CategoryCreate from "../components/Categories/CategoryCreate";
 import CategoryEdit from "../components/Categories/CategoryEdit";
-import axios from "axios";
-import { useSearchParams } from "react-router-dom";
-import { ModalContext } from "../contexts/ModalContext";
+import { useModal } from "../contexts/ModalContext";
+import { useCategories } from "../hooks/categories";
 
 export default function Categories() {
-  const { setModalContent, setModalShow, setModalTitle } =
-    useContext(ModalContext);
-
-  const [categories, setCategories] = useState([]);
-  const params = useSearchParams();
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/categories")
-      .then((res) => {
-        setCategories(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Aldaa garlaa");
-      });
-  }, []);
+  const [categories, setCategories] = useCategories();
+  const { setModalContent, setModalShow, setModalTitle } = useModal();
 
   const afterSubmit = (category) => {
     setCategories([...categories, category]);

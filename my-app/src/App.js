@@ -13,6 +13,7 @@ import { ModalProvider } from './contexts/ModalContext';
 import Accordion from 'react-bootstrap/Accordion';
 import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
+import Openai from './pages/Openai';
 
 
 
@@ -94,6 +95,7 @@ function App() {
             <Route path="/menu-positions/:id" element={<Menus />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/generate" element={<Openai/>}/>
             {/* <Route path="/signout" element={<Signout setMe={setMe} />} /> */}
           </Routes>
         </div>
