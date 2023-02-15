@@ -6,6 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { createContext } from "react";
+import { useToast } from "../hooks";
 
 export const AlertDialogContext = createContext({});
 
@@ -21,6 +22,7 @@ export const AlertDialogProvider = ({ children }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const showToast = useToast();
 
   return (
     <AlertDialogContext.Provider value={{ setHeading, setTitle, setOpen }}>
@@ -39,7 +41,12 @@ export const AlertDialogProvider = ({ children }) => {
 
           <DialogActions>
             <Button onClick={handleClose}>Disagree</Button>
-            <Button onClick={handleClose} autoFocus>
+            <Button
+              onClick={() => {
+                showToast();
+              }}
+              autoFocus
+            >
               Agree
             </Button>
           </DialogActions>
