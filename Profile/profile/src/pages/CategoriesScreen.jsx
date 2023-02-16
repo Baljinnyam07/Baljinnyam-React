@@ -1,5 +1,5 @@
-import { Delete, Edit, Home } from "@mui/icons-material";
-import { Button, IconButton, Tooltip, Typography } from "@mui/material";
+import { Home } from "@mui/icons-material";
+import { Button, Link, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import { BreadCrumbs } from "../components";
 import { DataGrid } from "@mui/x-data-grid";
@@ -7,9 +7,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
+import { Link as RouterLink } from "react-router-dom";
+import { ActionsRender } from "../components/ActionsRender";
+
 const columns = [
-  { field: "id", headerName: "ID", width: 60 },
-  { field: "Name", headerName: "Name", flex: 1 },
+  { field: "id", headerName: "Id", width: 60 },
+  { field: "name", headerName: "Name", flex: 1 },
   {
     field: "",
     headerName: "Actions",
@@ -17,20 +20,7 @@ const columns = [
     sortable: false,
     filterable: false,
     headerAlign: "center",
-    renderCell: (params) => (
-      <Stack sx={{ flexDirection: "row", gap: 3 }}>
-        <Tooltip title="Edit">
-          <IconButton aria-label="edit" color="primary">
-            <Edit fontSize="inherit" />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete" color="secondary">
-            <Delete fontSize="inherit" />
-          </IconButton>
-        </Tooltip>
-      </Stack>
-    ),
+    renderCell: (params) => <ActionsRender item={params.row.id} />,
   },
 ];
 
@@ -69,7 +59,10 @@ export const CategoriesScreen = () => {
           Categories
         </Typography>
         <Stack sx={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Button variant="contained">New</Button>
+          <Link to={"new"} component={RouterLink}>
+            <Button variant="contained">New</Button>
+          </Link>
+
           <Button variant="contained">Filter</Button>
         </Stack>
         <Box sx={{ height: 400, width: "100%", mt: 3 }}>

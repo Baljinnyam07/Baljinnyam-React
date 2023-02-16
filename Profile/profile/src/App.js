@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 import { CategoriesScreen, HomeScreen } from './pages';
 import { Route, Routes} from 'react-router'
 import { blueGrey } from '@mui/material/colors';
+import { NewUser } from './pages/NewUser';
 
 
 const bgColor = blueGrey[50];
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeScreen/>}/>
           <Route path='/categories' element={<CategoriesScreen/>}/>
+          <Route path='/categories/new' element={<NewUser/>}/>
         </Routes>
       </Box>
     </Layout>
