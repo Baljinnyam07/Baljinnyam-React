@@ -8,7 +8,10 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useState } from "react";
 import { Bar } from "react-chartjs-2";
+import reactSelect from "react-select";
+import { DemoClassComponent } from "../components/DemoClassComponents";
 
 ChartJS.register(
   CategoryScale,
@@ -84,11 +87,14 @@ export const pieData = {
 };
 
 export default function Home() {
+  const [showButton, setShowButton] = useState(true);
+
   return (
     <div className="container-sm body-container">
       <div className="row">
         <div className="col-12">
           <Bar options={options} data={data} />
+          <DemoClassComponent />
         </div>
       </div>
     </div>
