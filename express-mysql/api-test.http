@@ -1,0 +1,41 @@
+GET http://localhost:8000/
+
+###
+GET http://localhost:8000/id
+content-type: application/json
+
+{
+    "id":15
+}
+
+###
+
+POST http://localhost:8000/
+content-type: application/json
+
+{
+    "name":"Technology",
+    "slug":"tech12",
+    "imgUrl":""
+}
+
+###
+
+DELETE http://localhost:8000/
+content-type: application/json
+
+{
+    "id":"17"
+}
+
+###
+
+PUT http://localhost:8000/
+content-type: application/json
+
+{
+    "id":"15",
+    "name":"Shop23",
+    "slug":"shop22",
+    "imgUrl":""
+}
