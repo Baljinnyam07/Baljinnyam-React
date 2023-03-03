@@ -1,12 +1,10 @@
+//CATEGORIES
+
 GET http://localhost:8000/categories
 
 ###
-GET http://localhost:8000/categories/id
+GET http://localhost:8000/categories/31
 content-type: application/json
-
-{
-    "id":15
-}
 
 ###
 
@@ -15,27 +13,66 @@ content-type: application/json
 
 {
     "name":"Technology",
-    "slug":"tech12",
+    "slug":"TRACEdsafd",
     "imgUrl":""
 }
 
 ###
 
-DELETE http://localhost:8000/categories
+DELETE http://localhost:8000/categories/31
+content-type: application/json
+
+
+###
+
+PUT http://localhost:8000/categories/id
 content-type: application/json
 
 {
-    "id":"17"
+    "id":"32",
+    "name":"Eshop",
+    "slug":"eshop2",
+    "imgUrl":""
+}
+
+
+
+//PRODUCT
+
+
+###
+
+GET http://localhost:8000/product
+
+###
+
+GET http://localhost:8000/product/5
+
+
+
+###
+
+POST http://localhost:8000/product
+content-type: application/json
+
+{
+    "name":"History",
+    "slug":"history",
+    "imgUrl":""
 }
 
 ###
 
-PUT http://localhost:8000/categories
+DELETE http://localhost:8000/product/5
+
+###
+
+PUT http://localhost:8000/product/id
 content-type: application/json
 
 {
-    "id":"15",
-    "name":"Shop23",
-    "slug":"shop22",
+    "id":6,
+    "name":"Shop",
+    "slug":"history123333",
     "imgUrl":""
 }

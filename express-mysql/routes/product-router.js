@@ -1,15 +1,15 @@
 import express from 'express';
-import { createCategories, deleteCategories, getCategories, sortCategories, updateCategories } from '../services/category-service.js';
+import { createProduct, deleteProduct, getProduct, sortProduct, updateProduct } from '../services/product-service.js';
 
 const router = express.Router();
 
 router.get('/', async (req,res)=>{
-    res.json(await getCategories());
+    res.json(await getProduct());
 });
-router.get("/:id", async (req,res)=>{
+router.get('/:id', async (req,res)=>{
      const { id } = req.params;
     try{
-        res.json(await sortCategories(id));
+        res.json(await sortProduct(id));
     }catch(err){
         res.status(400).json('Something went wrong')
     }
@@ -18,25 +18,26 @@ router.get("/:id", async (req,res)=>{
 router.post('/', async(req, res)=>{
     const {name, slug, imgUrl} =req.body;
     try{
-        res.json(await createCategories(name,slug, imgUrl))
+        res.json(await createProduct(name,slug, imgUrl))
     }catch(err){
         res.status(400).json("Something went wrong")
     }
 })
 
 router.delete('/:id', async(req,res)=>{
-    const { id } = req.params;
+    const {id} = req.params;
     try{
-        res.json(await deleteCategories(id))
+        res.json(await deleteProduct(id))
     }catch(err){
         res.status(400).json('Something went wrong')
     }
 })
 
 router.put('/:id', async(req,res)=>{
-    const {name, slug, imgUrl,id} = req.body;
+    const {id} = req.params;
+    const {name, slug, imgUrl} = req.body;
     try{
-        res.json(await updateCategories(name, slug, imgUrl, id))
+        res.json(await updateProduct(name, slug, imgUrl, id))
     }catch(err){
         res.status(400).json('Something went wrong')
     }
