@@ -5,7 +5,7 @@ GET http://localhost:8000/categories/id
 content-type: application/json
 
 {
-    "id":18
+    "id":15
 }
 
 ###

@@ -9,7 +9,7 @@ router.get('/', async (req,res)=>{
 router.get('/id', async (req,res)=>{
      const {id} = req.body;
     try{
-            res.json(await sortCategories(id));
+        res.json(await sortCategories(id));
     }catch(err){
         res.status(400).json('Something went wrong')
     }
