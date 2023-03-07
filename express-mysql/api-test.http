@@ -72,7 +72,58 @@ content-type: application/json
 
 {
     "id":6,
-    "name":"Shop",
-    "slug":"history123333",
+    "name":"Shopdsadsa",
+    "slug":"history123333dsadsa",
     "imgUrl":""
+}
+
+###
+//USER
+
+GET http://localhost:8000/users
+
+###
+
+GET http://localhost:8000/users
+
+
+
+###
+
+POST http://localhost:8000/users
+content-type: application/json
+
+{
+    "firstName":"Temuulen",
+    "lastName": "daride",
+    "birthDate" : "1998-07-11",
+    "email": "temuulennn.m@pinecone.mn",
+    "phone": "89898989",
+    "password": "",
+    "imageUrl": ""
+}
+
+###
+
+DELETE http://localhost:8000/users/0Tc3GwlqkRMJ574WX0wt2
+
+###
+
+PUT http://localhost:8000/users/Yv5DpMq_wTDku1OuXxTN8
+content-type: application/json
+
+{
+    "firstName": "daaaaaaas",
+    "lastName": "dsaaaa",
+    "birthDate": "1235-07-10",
+    "email": "dsa.m@pinecone.mn",
+    "emailConfirmed": 0,
+    "phone": 1112211,
+    "phoneConfirmed": 0,
+    "password": "",
+    "imageUrl": "",
+    "isAdmin": 0,
+    "created": null,
+    "updated": null,
+    "updatedAt": null
 }

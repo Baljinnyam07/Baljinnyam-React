@@ -5,7 +5,7 @@ const pool = createPool({
     user:'root',
     port:3307,
     password:'',
-    database:'eshop'
+    database:'Green'
 })
 .promise();
 
