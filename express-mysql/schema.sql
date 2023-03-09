@@ -62,3 +62,52 @@ ADD
 ALTER TABLE doto
 ADD
     FOREIGN KEY (todoCategoryId) REFERENCES todoCategory(id);
+
+CREATE TABLE
+    category(
+        categoryId INT AUTO_INCREMENT name VARCHAR (255) NOT NULL slug VARCHAR (255) NOT NULL productCount INT DEFAULT 0 parent_id INT createdAt TIMESTAMP
+    );
+
+CREATE TABLE
+    product (
+        categoryId,
+        productId INT AUTO_INCREMENT,
+        categoryId INT,
+        name VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) NOT NULL,
+        shortDescription VARCHAR(1000),
+        imageUrl VARCHAR(1000),
+        text TEXT,
+        price INT,
+        discountPrice INT,
+        remaining INT DEFAULT 0,
+        readCount INT DEFAULT 0,
+        rating DECIMAL(2, 1),
+        created VARCHAR(255),
+        createdAt TIMESTAMP,
+        updated VARCHAR(255),
+        updatedAt TIMESTAMP
+    );
+
+INSERT INTO `category` VALUES ('Shoes', 'shoes', '', 0,);
+
+CREATE TABLE
+    product (
+        categoryId,
+        productId INT AUTO_INCREMENT,
+        categoryId INT,
+        name VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) NOT NULL,
+        shortDescription VARCHAR(1000),
+        imageUrl VARCHAR(1000),
+        text TEXT,
+        price INT,
+        discountPrice INT,
+        remaining INT DEFAULT 0,
+        readCount INT DEFAULT 0,
+        rating DECIMAL(2, 1),
+        created VARCHAR(255),
+        createdAt TIMESTAMP,
+        updated VARCHAR(255),
+        updatedAt TIMESTAMP
+    );

@@ -1,41 +1,3 @@
-//CATEGORIES
-
-GET http://localhost:8000/categories
-
-###
-GET http://localhost:8000/categories/31
-content-type: application/json
-
-###
-
-POST http://localhost:8000/categories
-content-type: application/json
-
-{
-    "name":"Technology",
-    "slug":"TRACEdsafd",
-    "imgUrl":""
-}
-
-###
-
-DELETE http://localhost:8000/categories/31
-content-type: application/json
-
-
-###
-
-PUT http://localhost:8000/categories/id
-content-type: application/json
-
-{
-    "id":"32",
-    "name":"Eshop",
-    "slug":"eshop2",
-    "imgUrl":""
-}
-
-
 
 //PRODUCT
 
@@ -56,25 +18,24 @@ POST http://localhost:8000/product
 content-type: application/json
 
 {
-    "name":"History",
-    "slug":"history",
-    "imgUrl":""
+    "name":"Nikee",
+    "slug":"gutalaa"
+    
 }
 
 ###
 
-DELETE http://localhost:8000/product/5
+DELETE http://localhost:8000/product/1cM0mBA6-CIMmN6adZ1bz
 
 ###
 
-PUT http://localhost:8000/product/id
+PUT http://localhost:8000/product/SuWHjqQu6MeysNx2hExEf
 content-type: application/json
 
 {
-    "id":6,
     "name":"Shopdsadsa",
-    "slug":"history123333dsadsa",
-    "imgUrl":""
+    "slug":"history123333dsadsa"
+ 
 }
 
 ###
@@ -126,4 +87,118 @@ content-type: application/json
     "created": null,
     "updated": null,
     "updatedAt": null
+}
+
+
+###
+//Category
+
+GET http://localhost:8000/category
+
+###
+
+GET http://localhost:8000/category
+
+
+
+###
+
+POST http://localhost:8000/category
+content-type: application/json
+
+{
+    "name":"Nike",
+    "slug":"t-shirt",
+    "productCount":"0"
+
+}
+
+###
+
+DELETE http://localhost:8000/category/CZGTJ5z8KnhKQ1q9vTx8X
+
+###
+
+PUT http://localhost:8000/category/mlkkXvnd0a7xigbEMwPib
+content-type: application/json
+
+{
+    "name": "Puma",
+    "slug": "tt-shirtt",
+    "productCount": 43,
+    "parent_id": null,
+    "createdAt": "",
+    "updated": null,
+    "updatedAt": null
+}
+
+###
+
+//ProductImage
+
+
+GET http://localhost:8000/productImage
+
+###
+
+GET http://localhost:8000/category
+
+
+
+###
+
+POST http://localhost:8000/productImage
+content-type: application/json
+
+{
+    "imageUrl":"google.com/awatipool-query"
+
+}
+
+###
+
+DELETE http://localhost:8000/productImage/jkQi1KnrgDzWXUdBxxVUO
+
+###
+
+PUT http://localhost:8000/productImage/m1bmPHNOr9nyCjp5j-Fw6
+content-type: application/json
+
+{
+    "imageUrl":"youtube.com/awatipool-query"
+}
+
+###
+
+//ProductReview
+
+
+GET http://localhost:8000/productReview
+
+###
+
+GET http://localhost:8000/category
+
+
+
+###
+
+POST http://localhost:8000/productReview
+content-type: application/json
+
+{
+    "rating":""
+}
+
+###
+
+DELETE http://localhost:8000/productReview/jkQi1KnrgDzWXUdBxxVUO
+
+###
+
+PUT http://localhost:8000/productReview/m1bmPHNOr9nyCjp5j-Fw6
+content-type: application/json
+
+{
+    "rating":"youtube.com/awatipool-query"
 }

@@ -16,28 +16,28 @@ router.get('/:id', async (req,res)=>{
 });
 
 router.post('/', async(req, res)=>{
-    const {name, slug, imgUrl} =req.body;
+    const {name, slug} =req.body;
     try{
-        res.json(await createProduct(name,slug, imgUrl))
+        res.json(await createProduct({name,slug}))
     }catch(err){
         res.status(400).json("Something went wrong")
     }
 })
 
-router.delete('/:id', async(req,res)=>{
-    const {id} = req.params;
+router.delete('/:productId', async(req,res)=>{
+    const {productId} = req.params;
     try{
-        res.json(await deleteProduct(id))
+        res.json(await deleteProduct(productId))
     }catch(err){
         res.status(400).json('Something went wrong')
     }
 })
 
-router.put('/:id', async(req,res)=>{
-    const {id} = req.params;
-    const {name, slug, imgUrl} = req.body;
+router.put('/:productId', async(req,res)=>{
+    const {productId} = req.params;
+    const {name, slug} = req.body;
     try{
-        res.json(await updateProduct(name, slug, imgUrl, id))
+        res.json(await updateProduct(name, slug, productId))
     }catch(err){
         res.status(400).json('Something went wrong')
     }
