@@ -12,7 +12,8 @@ import { ActionsRender } from "../components/ActionsRender";
 
 const columns = [
   { field: "id", headerName: "Id", width: 60 },
-  { field: "name", headerName: "Name", flex: 1 },
+  { field: "firstName", headerName: "Name", flex: 1 },
+  { field: "lastName", headerName: "Name", flex: 1 },
   {
     field: "",
     headerName: "Actions",
@@ -28,7 +29,7 @@ export const CategoriesScreen = () => {
   const [categories, setCategories] = useState([]);
   const [pageSize, setPageSize] = useState(10);
   useEffect(() => {
-    axios.get("http://localhost:8000/categories").then((res) => {
+    axios.get("http://localhost:8000/users").then((res) => {
       setCategories(res.data);
     });
   }, []);

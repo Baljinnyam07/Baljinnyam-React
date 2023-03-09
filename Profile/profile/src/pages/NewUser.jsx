@@ -9,11 +9,11 @@ import { useNavigate } from "react-router";
 
 export const NewUser = ({ afterSubmit }) => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const showToast = useToast();
   const submit = () => {
     axios
-      .post("http://localhost:8000/categories", { name })
+      .post("http://localhost:8000/users", { firstName })
       .then((res) => {
         showToast();
       })
@@ -51,19 +51,18 @@ export const NewUser = ({ afterSubmit }) => {
           Add users
         </Typography>
         <TextField
-          value={name}
+          value={firstName}
           id="outlined-basic"
           label="Name"
           variant="outlined"
           onChange={(e) => {
-            setName(e.target.value);
+            setFirstName(e.target.value);
           }}
         />
         <Button
           onClick={() => {
             submit();
             showToast();
-            navigate("/categories");
           }}
           sx={{ mt: 3, width: "5vh" }}
           variant="contained"

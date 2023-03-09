@@ -55,13 +55,8 @@ POST http://localhost:8000/users
 content-type: application/json
 
 {
-    "firstName":"Temuulen",
-    "lastName": "daride",
-    "birthDate" : "1998-07-11",
-    "email": "temuulennn.m@pinecone.mn",
-    "phone": "89898989",
-    "password": "",
-    "imageUrl": ""
+    "firstName":"Tem",
+    
 }
 
 ###
