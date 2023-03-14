@@ -1,0 +1,28 @@
+[
+    {
+        "plot":"A young lady, opressed by his father, goes on an outing in the country...",
+        "genres":["Drama","Short"],
+        "runtime":"5",
+        "rated":"UNRATED",
+        "cast":["Walter Red","JoJo","Himawari"],
+        "title":"Bring dust",
+        "writter":["Orc Rader","Bat Rider","Golum"],
+        "languages":["Quenya","SomeEnglish"],
+        "awards":["ALLOFOSCOR"],
+        "year":2023,
+        "type":"movie"
+    },
+    {
+        "plot":"Frendly animals",
+        "genres":["Sad","Short"],
+        "runtime":"5",
+        "rated":"UNRATED",
+        "cast":["Walter Red","JoJo","Himawari"],
+        "title":"Bring dust",
+        "writter":["Cat","Dog","SomeMouse"],
+        "languages":["Quenya","SomeEnglish"],
+        "awards":["ALLOFOSCOR"],
+        "year":2023,
+        "type":"movie"
+    }
+]
