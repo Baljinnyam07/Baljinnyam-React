@@ -26,7 +26,7 @@ export default function Signup() {
 
   const submitSignup = () => {
     let status = 200;
-    fetch("https://demo-api-one.vercel.app/api/signup", {
+    axios.post("http://localhost:8081/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

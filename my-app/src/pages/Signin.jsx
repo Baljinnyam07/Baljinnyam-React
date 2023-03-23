@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TOAST_CONFIG } from "../utils/configs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
@@ -12,24 +13,14 @@ export default function Signin() {
   const navigate = useNavigate();
 
   const submitSingIn = () => {
-    let status = 200;
-    fetch("https://demo-api-one.vercel.app/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
+    axios
+      .post("https://localhost:8081/api/login", { email, password })
       .then((res) => {
-        status = res.status;
-        return res.json();
-      })
-      .then((data) => {
-        if (status !== 200) {
-          toast.error(data.message, TOAST_CONFIG);
+        if (res.status !== 200) {
+          toast.error(res.data.message, TOAST_CONFIG);
         } else {
-          toast.success(data.message, TOAST_CONFIG);
-          localStorage.setItem("token", data.body);
+          toast.success(res.Textdata.message, TOAST_CONFIG);
+          localStorage.setItem("token", res.data.body.token);
           navigate("/signin/success");
         }
       })

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function SignInError() {
+export default function SigninError() {
   return (
     <div className="w-100 min-vh-100 d-flex align-items-center justify-content-center flex-column">
       <h1 className="fw-bold text-uppercase">Page not found</h1>
