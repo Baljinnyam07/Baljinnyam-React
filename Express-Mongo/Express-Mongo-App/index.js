@@ -4,6 +4,7 @@ import userRouter from '../Express-Mongo-App/routes/users-router.js'
 import multer from "multer";
 import { nanoid } from "nanoid";
 import cloudinary from "cloudinary"
+import cors from "cors"
 
 cloudinary.config({
   cloud_name:"drweibbjm",
@@ -39,6 +40,7 @@ const upload = multer({
 
 const PORT = 8081;
 const app = express();
+app.use(cors())
 app.use(express.json());
 app.use("/api/users", userRouter);
 
