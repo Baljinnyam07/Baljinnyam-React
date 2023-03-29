@@ -6,6 +6,8 @@ import { nanoid } from "nanoid";
 import cloudinary from "cloudinary"
 import cors from "cors"
 
+import ordersRouter from "./routes/ordersRouter.js"
+
 cloudinary.config({
   cloud_name:"drweibbjm",
   api_key:"723661743431336",
@@ -62,6 +64,7 @@ app.post('/files',upload.single('image'), async (req,res)=>{
 app.use("/uploads", express.static("uploads"));
 
 
+app.use('/orders', ordersRouter)
 
 app.listen(PORT, () => {
   console.log("http://localhost:" + PORT);
